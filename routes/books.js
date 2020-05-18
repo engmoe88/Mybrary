@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
 
 // New Book Route
 router.get('/new', async (req, res) => {
-    renderNewPage(res, new Book())
+    renderNewPage(res, new Book(), false)
 })
 
 // Create Book
@@ -120,14 +120,14 @@ router.delete('/:id', async (req, res) => {
 }) 
 
 
-async function renderNewPage(res, book, hasError = false) {
+async function renderNewPage(res, book, hasError) {
     renderFormPage(res, book, 'new', hasError)
 }
 
 async function renderEditPage(res, book, hasError = false) {
     renderFormPage(res, book, 'edit', hasError)
 }
-async function renderFormPage(res, book, form, hasError = false) {
+async function renderFormPage(res, book, form, hasError) {
     try {
         const authors = await Author.find({})
         const params = {
